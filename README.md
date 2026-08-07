@@ -1,20 +1,19 @@
-# Dataify MCP Python SDK
+# Dataify Python SDK
 
-Python 客户端库，用于通过 [MCP (Model Context Protocol)](https://spec.modelcontextprotocol.io/) 访问 [Dataify](https://dashboard.dataify.com) 数据采集平台。
+Python 客户端库，**直接调用** [Dataify](https://dashboard.dataify.com) 上游 REST 接口（**不走 MCP 协议**），用于网页采集与搜索引擎抓取。
+
 
 ## 功能
 
-- 🌐 **网页解锁器** — 绕过 CAPTCHA、JS 渲染，返回 HTML 或 PNG 截图
-- 🔍 **搜索引擎** — Google（17 种搜索类型）、Bing（6 种）、Yandex、DuckDuckGo
-- 🛒 **平台抓取器** — Amazon、YouTube、TikTok、Facebook、Instagram、Reddit、Twitter/X、LinkedIn、Glassdoor、Indeed 等 35+ 平台
-- ⚡ **异步优先** — 基于 `httpx` 的现代异步 API
-- 🛡️ **类型安全** — 完整的类型注解，支持 `mypy --strict`
-- 🔌 **双传输模式** — 支持 Streamable HTTP 和 SSE
+- 🔍 **搜索引擎** — Google（17 种）、Bing（6 种）、Yandex、DuckDuckGo，走 `POST /request`
+- 🛒 **平台抓取器** — Amazon、YouTube、TikTok、Facebook、Instagram、Reddit、Twitter/X、LinkedIn、Glassdoor、Indeed、Walmart、Zillow、Airbnb、Booking、Crunchbase、eBay、GitHub 等 45 个采集器，走 `POST /builder?platform=1`
+- 📖 **参数全暴露** — 每个工具函数把上游请求参数、类型、是否必填、中文描述都写在签名与 docstring 里；另见 `docs/api_reference.md`
+- 🐍 **零依赖** — 仅用标准库 `urllib`，同步 API
 
 ## 安装
 
 ```bash
-pip install dataify-mcp
+pip install dataify-sdk
 ```
 
 要求 Python >= 3.10。
@@ -22,81 +21,47 @@ pip install dataify-mcp
 ## 快速开始
 
 ```python
-import asyncio
-from dataify_mcp import DataifyClient
+from dataify_sdk import DataifyClient
+from dataify_sdk.tools.amazonproduct import amazon_product_by_asin
+from dataify_sdk.tools.googlesearch import google_search
 
-async def main():
-    async with DataifyClient(
-        base_url="http://localhost:7780",
-        token="your-api-token",
-    ) as client:
-        # 列出可用工具
-        tools = await client.list_tools()
-        print(f"可用工具: {len(tools)} 个")
+# token 也可通过环境变量 DATAIFY_TOKEN 提供
+client = DataifyClient(token="YOUR_TOKEN")
 
-        # 调用 Google 搜索
-        result = await client.call_tool("google_search", {
-            "q": "今天天气",
-            "gl": "cn",
-            "hl": "zh-cn",
-        })
-        print(result)
+# 采集类：直接提交 Builder 任务
+result = amazon_product_by_asin(asin="B0BZYCJK89", client=client)
 
-asyncio.run(main())
+# 搜索类：直接打搜索引擎接口
+result = google_search(q="pizza", client=client)
 ```
 
-## 连接方式
-
-### Streamable HTTP（默认）
+也可以不传 `client`，使用默认 client（读取 `DATAIFY_TOKEN` 环境变量）：
 
 ```python
-client = DataifyClient(
-    base_url="http://localhost:7780",
-    token="your-token",
-    transport="http",  # 默认值
-)
+from dataify_sdk.tools.googlesearch import google_search
+
+result = google_search(q="pizza")
 ```
 
-### SSE（Server-Sent Events）
+## API 设计
 
-```python
-client = DataifyClient(
-    base_url="http://localhost:7780",
-    token="your-token",
-    transport="sse",
-)
-```
-
-### 工具权限过滤
-
-```python
-# 只使用指定的工具类别
-client = DataifyClient(
-    base_url="http://localhost:7780",
-    token="your-token",
-    tool_codes="serp,google",  # 多个用逗号分隔
-)
-```
+- **每个 `spider_id` = 一个独立函数**（采集类），例如 `amazon_product_by_asin()`、`amazon_product_by_url()`、`amazon_product_by_keywords()`。
+- **搜索类每个引擎一个函数**，例如 `google_search()`、`bing_search()`、`yandex_search()`。
+- 所有函数签名与 docstring 完整暴露上游参数及其描述；`docs/api_reference.md` 为离线参数手册。
+- 函数返回解析后的 JSON `dict`（即上游原始响应）。
 
 ## 错误处理
 
 ```python
-from dataify_mcp import (
-    DataifyClient,
-    AuthenticationError,
-    ToolError,
-    ConnectionError,
-)
+from dataify_sdk import DataifyClient, DataifyAPIError, DataifyConnectionError
 
+client = DataifyClient(token="YOUR_TOKEN")
 try:
-    async with DataifyClient("http://localhost:7780", "token") as client:
-        result = await client.call_tool("google_search", {"q": "test"})
-except AuthenticationError:
-    print("Token 无效，请检查 https://dashboard.dataify.com")
-except ToolError as e:
-    print(f"工具执行失败: {e}")
-except ConnectionError:
-    print("无法连接服务器")
+    result = google_search(q="pizza", client=client)
+except DataifyAPIError as e:
+    print(f"上游返回错误 HTTP {e.status_code}: {e.body}")
+except DataifyConnectionError:
+    print("无法连接 Dataify 上游")
 ```
 
 ## 开发
@@ -105,15 +70,11 @@ except ConnectionError:
 # 安装开发依赖
 pip install -e ".[dev]"
 
-# 代码检查
-ruff check src/dataify_mcp/
-mypy src/dataify_mcp/
-
 # 运行测试
 pytest
 
-# 生成工具封装代码
-python scripts/codegen.py --server http://localhost:7780 --token YOUR_TOKEN
+# 从 Go 参考项目重新生成工具函数与参数手册
+python scripts/codegen.py
 ```
 
 ## 许可

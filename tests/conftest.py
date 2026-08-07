@@ -1,115 +1,46 @@
-"""Shared test fixtures for the Dataify MCP SDK."""
+"""Shared fixtures for the Dataify SDK tests."""
 
 from __future__ import annotations
 
-import json
+import io
+import urllib.error
+import urllib.parse
+import urllib.request
 from typing import Any
+from unittest import mock
 
-import httpx
 import pytest
 
 
-# ---------------------------------------------------------------------------
-# Mock server responses
-# ---------------------------------------------------------------------------
+class _FakeResponse:
+    def __init__(self, body: str | bytes) -> None:
+        self._body = body.encode() if isinstance(body, str) else body
 
+    def read(self) -> bytes:
+        return self._body
 
-def make_tools_list_response(req_id: int) -> dict[str, Any]:
-    """Return a minimal tools/list response with a few representative tools."""
-    return {
-        "jsonrpc": "2.0",
-        "id": req_id,
-        "result": {
-            "tools": [
-                {
-                    "name": "google_search",
-                    "description": "Search Google for web results.",
-                    "inputSchema": {
-                        "type": "object",
-                        "properties": {
-                            "q": {
-                                "type": "string",
-                                "description": "Search query",
-                                "default": "pizza",
-                            },
-                            "gl": {
-                                "type": "string",
-                                "description": "Country code",
-                                "default": "",
-                            },
-                        },
-                        "required": ["q"],
-                    },
-                },
-                {
-                    "name": "query_user_info",
-                    "description": "Query user account info.",
-                    "inputSchema": {
-                        "type": "object",
-                        "properties": {},
-                    },
-                },
-                {
-                    "name": "request_web_unlocker",
-                    "description": "Unlock a web page.",
-                    "inputSchema": {
-                        "type": "object",
-                        "properties": {
-                            "url": {
-                                "type": "string",
-                                "description": "Target URL",
-                            },
-                            "type": {
-                                "type": "string",
-                                "description": "Output format",
-                                "default": "html",
-                            },
-                        },
-                        "required": ["url"],
-                    },
-                },
-            ]
-        },
-    }
+    def __enter__(self) -> "_FakeResponse":
+        return self
 
-
-def make_initialize_response(req_id: int) -> dict[str, Any]:
-    """Return a minimal initialize response."""
-    return {
-        "jsonrpc": "2.0",
-        "id": req_id,
-        "result": {
-            "protocolVersion": "2024-11-05",
-            "serverInfo": {
-                "name": "dataify-task-status-mcp",
-                "version": "1.0.0",
-            },
-            "capabilities": {"tools": {}},
-        },
-    }
-
-
-def make_call_tool_response(req_id: int, result_content: Any = None, is_error: bool = False) -> dict[str, Any]:
-    """Return a tools/call response."""
-    content = result_content if result_content is not None else {"status": "ok", "data": []}
-    return {
-        "jsonrpc": "2.0",
-        "id": req_id,
-        "result": {
-            "content": [{"type": "text", "text": json.dumps(content, ensure_ascii=False)}],
-            "isError": is_error,
-        },
-    }
-
-
-# ---------------------------------------------------------------------------
-# Fixtures
-# ---------------------------------------------------------------------------
+    def __exit__(self, *exc: Any) -> bool:
+        return False
 
 
 @pytest.fixture
-def mock_server_url() -> str:
-    return "http://mock-server:7780"
+def captured_request():
+    """Patch ``urllib.request.urlopen`` and expose the last Request object.
+
+    The real client logic (form encoding, empty-value dropping, auth header)
+    runs; only the socket round-trip is stubbed.
+    """
+    holder: dict[str, urllib.request.Request] = {}
+
+    def _fake(req: urllib.request.Request, timeout: int | None = None):
+        holder["req"] = req
+        return _FakeResponse('{"ok": true}')
+
+    with mock.patch("urllib.request.urlopen", side_effect=_fake):
+        yield holder
 
 
 @pytest.fixture
@@ -117,7 +48,12 @@ def api_token() -> str:
     return "test-token-12345"
 
 
-@pytest.fixture
-def tool_manifest() -> list[dict[str, Any]]:
-    """Return a small, representative tool manifest for testing codegen."""
-    return make_tools_list_response(1)["result"]["tools"]
+def decode_form(req: urllib.request.Request) -> dict[str, str]:
+    """Decode a urlencoded request body into a dict."""
+    return dict(urllib.parse.parse_qsl(req.data.decode("utf-8")))
+
+
+def raise_http_error(req: urllib.request.Request, timeout: int | None = None):
+    raise urllib.error.HTTPError(
+        req.full_url, 400, "Bad Request", {}, io.BytesIO(b'{"error":"bad"}')
+    )
