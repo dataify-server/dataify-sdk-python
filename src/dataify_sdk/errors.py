@@ -20,6 +20,8 @@ class DataifyAPIError(DataifyError):
         Raw response body (or error text) returned by the upstream.
     """
 
+
+
     def __init__(self, message: str, status_code: int | None = None, body: str | None = None) -> None:
         self.status_code = status_code
         self.body = body
