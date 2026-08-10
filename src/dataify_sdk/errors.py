@@ -27,6 +27,8 @@ class DataifyAPIError(DataifyError):
         self.body = body
         super().__init__(message)
 
+
+
     def __str__(self) -> str:
         if self.status_code is not None:
             return f"{self.message} (HTTP {self.status_code})"
