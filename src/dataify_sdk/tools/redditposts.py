@@ -26,7 +26,7 @@ def reddit_posts_by_url(file_name: str = '{{TasksID}}', url: str = '', client: D
     ----------
     url: Reddit URL 或 subreddit URL。reddit_posts_by-url 默认值为 https://www.reddit.com/r/battlefield2042/comments/1cmqs1d/official_update_on_the_next_battlefield_game/；reddit_posts_by-subredditurl 默认值为 https://www.reddit.com/r/battlefield2042。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -52,7 +52,7 @@ def reddit_posts_by_keywords(file_name: str = '{{TasksID}}', keyword: str = '', 
     keyword: Reddit 关键词，该参数用于指定采集 Reddit 帖子的搜索关键词。用于 reddit_posts_by-keywords，默认值为 datascience。  [默认: (空)]
     num_of_posts: 最大帖子数，该参数用于指定采集帖子的最大数量。用于 reddit_posts_by-keywords 和 reddit_posts_by-subredditurl，默认值为 10。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,
@@ -81,7 +81,7 @@ def reddit_posts_by_subredditurl(file_name: str = '{{TasksID}}', num_of_posts: s
     num_of_posts: 最大帖子数，该参数用于指定采集帖子的最大数量。用于 reddit_posts_by-keywords 和 reddit_posts_by-subredditurl，默认值为 10。  [默认: (空)]
     sort_by_time: 时间排序，该参数用于指定采集帖子的时间排序方式。用于 reddit_posts_by-subredditurl，可选值：Now、Today、This Week、This Month、This Year、All Time，默认值为 Now。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

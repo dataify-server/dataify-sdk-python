@@ -26,7 +26,7 @@ def ebay_ebay_by_url(file_name: str = '{{TasksID}}', url: str = '', client: Data
     ----------
     url: eBay URL 或 Category URL。用于 ebay_ebay_by-url 时默认值为 https://www.ebay.com/itm/296197468977?itmmeta=01HRWJ04NFHYT9AX0XZB8F18G1&hash=item44f6beb331%3Ag%3ADEQAAOSw3CxlhTJ%7E&_trkparms=%2526rpp_cid%253D6523c97b0b7882040b9472b6；用于 ebay_ebay_by-category-url 时默认值为 https://www.ebay.com/b/Collectible-Japanese-Bells-1900-Now/165467/bn_3104829；用于 ebay_ebay_by-listurl 时默认值为 https://www.ebay.com/str/kptradingdeals?_trksid=p4429486.m145687.l149086。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -52,7 +52,7 @@ def ebay_ebay_by_category_url(count: str = '', file_name: str = '{{TasksID}}', u
     url: eBay URL 或 Category URL。用于 ebay_ebay_by-url 时默认值为 https://www.ebay.com/itm/296197468977?itmmeta=01HRWJ04NFHYT9AX0XZB8F18G1&hash=item44f6beb331%3Ag%3ADEQAAOSw3CxlhTJ%7E&_trkparms=%2526rpp_cid%253D6523c97b0b7882040b9472b6；用于 ebay_ebay_by-category-url 时默认值为 https://www.ebay.com/b/Collectible-Japanese-Bells-1900-Now/165467/bn_3104829；用于 ebay_ebay_by-listurl 时默认值为 https://www.ebay.com/str/kptradingdeals?_trksid=p4429486.m145687.l149086。  [默认: (空)]
     count: 数量，该参数用于指定采集结果的最大数量。用于 ebay_ebay_by-category-url、ebay_ebay_by-keywords 和 ebay_ebay_by-listurl，默认值为 60。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -79,7 +79,7 @@ def ebay_ebay_by_keywords(count: str = '', file_name: str = '{{TasksID}}', keywo
     keywords: 关键词，该参数用于指定采集 eBay 产品的搜索关键词。用于 ebay_ebay_by-keywords，默认值为 baby toys。  [默认: (空)]
     count: 数量，该参数用于指定采集结果的最大数量。用于 ebay_ebay_by-category-url、ebay_ebay_by-keywords 和 ebay_ebay_by-listurl，默认值为 60。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keywords": keywords,
@@ -106,7 +106,7 @@ def ebay_ebay_by_listurl(count: str = '', file_name: str = '{{TasksID}}', url: s
     url: eBay URL 或 Category URL。用于 ebay_ebay_by-url 时默认值为 https://www.ebay.com/itm/296197468977?itmmeta=01HRWJ04NFHYT9AX0XZB8F18G1&hash=item44f6beb331%3Ag%3ADEQAAOSw3CxlhTJ%7E&_trkparms=%2526rpp_cid%253D6523c97b0b7882040b9472b6；用于 ebay_ebay_by-category-url 时默认值为 https://www.ebay.com/b/Collectible-Japanese-Bells-1900-Now/165467/bn_3104829；用于 ebay_ebay_by-listurl 时默认值为 https://www.ebay.com/str/kptradingdeals?_trksid=p4429486.m145687.l149086。  [默认: (空)]
     count: 数量，该参数用于指定采集结果的最大数量。用于 ebay_ebay_by-category-url、ebay_ebay_by-keywords 和 ebay_ebay_by-listurl，默认值为 60。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

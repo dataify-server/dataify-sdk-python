@@ -26,7 +26,7 @@ def google_map_details_by_url(file_name: str = '{{TasksID}}', url: str = '', cli
     ----------
     url: Google 地图 URL，该参数用于指定待采集的 Google 地图访问链接信息。用于 google_map-details_by-url，默认值为 https://www.google.com/maps/place/Pizza+Inn+Magdeburg/data=!4m7!3m6!1s0x47a5f50c083530a3:0xfdba8746b538141!8m2!3d52.1263086!4d11.6094743!16s%2Fg%2F11kqmtk3dt!19sChIJozA1CAz1pUcRQYFTa3So2w8?authuser=0&hl=en&rclk=1。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -51,7 +51,7 @@ def google_map_details_by_cid(CID: str = '', file_name: str = '{{TasksID}}', cli
     ----------
     CID: CID，该参数用于指定待采集的 CID 信息。用于 google_map-details_by-cid，默认值为 2476046430038551731。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "CID": CID,
@@ -80,7 +80,7 @@ def google_map_details_by_location(country: str = '', file_name: str = '{{TasksI
     long: 经度，该参数用于指定要搜索的位置的经度。用于 google_map-details_by-location，默认值为 77。  [默认: (空)]
     zoom_level: 缩放级别，该参数用于指示要搜索的缩放级别。用于 google_map-details_by-location，默认值为 20。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,
@@ -109,7 +109,7 @@ def google_map_details_by_placeid(file_name: str = '{{TasksID}}', place_id: str 
     ----------
     place_id: 商家ID，该参数用于指定 Google 地图的商家 ID。用于 google_map-details_by-placeid，默认值为 ChIJ3S-JXmauEmsRUcIaWtf4MzE。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "place_id": place_id,

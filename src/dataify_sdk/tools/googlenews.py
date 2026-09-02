@@ -34,7 +34,7 @@ def google_news(gl: str = 'us', hl: str = '', json_: str = '1', kgmid: str = '',
     section_token: 定义 Google 新闻版块令牌。用于访问特定主题的子版块，例如“商业 -> 经济”。  [默认: (空)]
     story_token: 定义 Google 新闻报道令牌。用于访问特定报道的完整报道新闻结果。  [默认: (空)]
     so: 定义排序方法。结果可以按相关性或日期排序，默认按相关性排序。0 表示相关性，1 表示日期。  [默认: 0]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

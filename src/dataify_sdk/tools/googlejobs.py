@@ -36,7 +36,7 @@ def google_jobs(q: str, chips: str = '', gl: str = '', google_domain: str = 'goo
     ltype: 按居家办公过滤结果。此参数已被 Google 弃用，可设置为 true 或 1。  [默认: (空)]
     uds: 启用搜索过滤。它是 Google 提供的一个字符串作为过滤器。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果。设为 true 可跳过缓存，设为 false（默认）则使用缓存结果。缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

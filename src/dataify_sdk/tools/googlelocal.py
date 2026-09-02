@@ -34,7 +34,7 @@ def google_local(q: str, gl: str = '', google_domain: str = 'google.com', hl: st
     ludocid: 定义地点的 Google CID（客户标识符）。  [默认: (空)]
     tbs: 定义常规查询字段中无法实现的高级搜索参数。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果。设为 true 可跳过缓存，设为 false（默认）则使用缓存结果。缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

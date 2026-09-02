@@ -26,7 +26,7 @@ def facebook_event_by_eventlist_url(file_name: str = '{{TasksID}}', url: str = '
     ----------
     url: 活动列表 URL 或活动搜索 URL。用于 facebook_event_by-eventlist-url 时默认值为 https://www.facebook.com/nohoclub/events；用于 facebook_event_by-search-url 时默认值为 https://www.facebook.com/events/explore/us-atlanta/107991659233606。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -51,7 +51,7 @@ def facebook_event_by_search_url(file_name: str = '{{TasksID}}', url: str = '', 
     ----------
     url: 活动列表 URL 或活动搜索 URL。用于 facebook_event_by-eventlist-url 时默认值为 https://www.facebook.com/nohoclub/events；用于 facebook_event_by-search-url 时默认值为 https://www.facebook.com/events/explore/us-atlanta/107991659233606。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

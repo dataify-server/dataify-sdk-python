@@ -26,7 +26,7 @@ def facebook_post_by_posts_url(file_name: str = '{{TasksID}}', url: str = '', cl
     ----------
     url: 帖子 URL，该参数用于指定要采集的 Facebook 帖子 URL。用于 facebook_post_by-posts-url，默认值为 https://www.facebook.com/permalink.php?story_fbid=pfbid0gNjZBhqCxSqj9xJS5aygNwqFqNEM2fYbTFKKbsvvGdEfTgFyAYWSckvkEHPqAE7gl&id=61574926580533&rdid=86oaujwNGCCdPLfj#。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

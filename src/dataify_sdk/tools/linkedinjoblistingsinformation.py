@@ -26,7 +26,7 @@ def linkedin_job_listings_information_by_job_listing_url(file_name: str = '{{Tas
     ----------
     job_listing_url: 职位列表URL，该参数用于指定要采集的职位列表URL。用于 linkedin_job_listings_information_by-job-listing-url，默认值为 https://www.linkedin.com/jobs/reddit-inc.-jobs-worldwide?f_C=150573。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "job_listing_url": job_listing_url,
@@ -51,7 +51,7 @@ def linkedin_job_listings_information_by_job_url(file_name: str = '{{TasksID}}',
     ----------
     job_url: 职位URL，该参数用于指定要采集的职位URL。用于 linkedin_job_listings_information_by-job-url，默认值为文档提供的 LinkedIn 职位 URL。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "job_url": job_url,
@@ -77,7 +77,7 @@ def linkedin_job_listings_information_by_keyword(file_name: str = '{{TasksID}}',
     location: 职位位置，该参数用于指定通过特定位置搜索职位。用于 linkedin_job_listings_information_by-keyword，默认值为 New York。  [默认: New York]
     keyword: 关键词，该参数用于指定通过特定关键词搜索职位。用于 linkedin_job_listings_information_by-keyword，非必填，默认值为 product manager。  [默认: product manager]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "location": location,

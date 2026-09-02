@@ -26,7 +26,7 @@ def amazon_global_product_by_url(file_name: str = '{{TasksID}}', url: str = '', 
     ----------
     url: URLs，该参数用于指定待采集的访问 URL 地址。用于 amazon_global-product_by-url、amazon_global-product_by-category-url；未传时按采集器使用文档默认 URL。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -54,7 +54,7 @@ def amazon_global_product_by_category_url(file_name: str = '{{TasksID}}', get_sp
     sort_by: 排序方式。用于 amazon_global-product_by-category-url，仅传 cn 列：畅销排行、最新上架、平均评价、价格：从高到低、价格：从低到高、精选推荐。默认畅销排行。  [默认: 畅销排行]
     get_sponsored: 获取赞助商品。用于 amazon_global-product_by-category-url，参数值为 true 或 false，默认值为 true。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -86,7 +86,7 @@ def amazon_global_product_by_keywords(domain: str = 'https://www.amazon.com', fi
     highest_price: 最高价格，该参数用于指定要筛选的最高商品价格。用于 amazon_global-product_by-keywords，默认值为 50。  [默认: 50]
     page_turning: 采集页数，请输入要采集多少页的产品。用于 amazon_global-product_by-keywords、amazon_global-product_by-keywords-brand，默认值为 2。  [默认: 2]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,
@@ -117,7 +117,7 @@ def amazon_global_product_by_keywords_brand(brands: str = 'Adidas', file_name: s
     brands: 品牌，该参数用于指定采集的品牌信息，请输入 Amazon 平台有的品牌名称，如果找不到该品牌选项，则采集字段将为空。用于 amazon_global-product_by-keywords-brand，默认值为 Adidas。  [默认: Adidas]
     page_turning: 采集页数，请输入要采集多少页的产品。用于 amazon_global-product_by-keywords、amazon_global-product_by-keywords-brand，默认值为 2。  [默认: 2]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,

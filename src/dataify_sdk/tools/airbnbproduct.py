@@ -27,7 +27,7 @@ def airbnb_product_by_searchurl(country: str = '', file_name: str = '{{TasksID}}
     searchurl: 网址，该参数用于指定采集 Airbnb 中的房源搜索网址。用于 airbnb_product_by-searchurl，默认值为 https://www.airbnb.com/s/Greece/homes?query=Greece&refinement_paths%5B%5D=%2Fhomes&place_id=ChIJY2xxEcdKWxMRHS2a3HUXOjY&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=2025-03-01&monthly_length=3&monthly_end_date=2025-06-01&search_mode=regular_search&price_filter_input_type=0&channel=EXPLORE&date_picker_type=calendar&source=structured_search_input_header&search_type=filter_change&price_filter_num_nights=5&flexible_date_search_filter_type=1。  [默认: (空)]
     country: 国家，该参数用于指定采集 Airbnb 中的房源所属国家。非必填，默认值为 HK，参数值取国家列表中的 typeValue 列。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "searchurl": searchurl,

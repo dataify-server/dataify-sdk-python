@@ -6,7 +6,7 @@ Python 客户端库，**直接调用** [Dataify](https://dashboard.dataify.com) 
 ## 功能
 
 - 🔍 **搜索引擎** — Google（17 种）、Bing（6 种）、Yandex、DuckDuckGo，走 `POST /request`
-- 🛒 **平台抓取器** — Amazon、YouTube、TikTok、Facebook、Instagram、Reddit、Twitter/X、LinkedIn、Glassdoor、Indeed、Walmart、Zillow、Airbnb、Booking、Crunchbase、eBay、GitHub 等 45 个采集器，走 `POST /builder?platform=1`
+- 🛒 **平台抓取器** — Amazon、YouTube、TikTok、Facebook、Instagram、Reddit、Twitter/X、LinkedIn、Glassdoor、Indeed、Walmart、Zillow、Airbnb、Booking、Crunchbase、eBay、GitHub 等 45 个采集器，先走 `POST /builder?platform=1`，再可查询任务状态并下载结果
 - 📖 **参数全暴露** — 每个工具函数把上游请求参数、类型、是否必填、中文描述都写在签名与 docstring 里；另见 `docs/api_reference.md`
 - 🐍 **零依赖** — 仅用标准库 `urllib`，同步 API
 
@@ -25,23 +25,35 @@ from dataify_sdk import DataifyClient
 from dataify_sdk.tools.amazonproduct import amazon_product_by_asin
 from dataify_sdk.tools.googlesearch import google_search
 
-# token 也可通过环境变量 DATAIFY_TOKEN 提供
+# token 也可通过环境变量 DATAIFY_API_TOKEN 提供（兼容旧版 DATAIFY_TOKEN）
 client = DataifyClient(token="YOUR_TOKEN")
 
-# 采集类：直接提交 Builder 任务
-result = amazon_product_by_asin(asin="B0BZYCJK89", client=client)
+# 采集类：先提交 Builder 任务
+task = amazon_product_by_asin(asin="B0BZYCJK89", client=client)
+task_id = task["data"]["task_id"]
+
+# 再查询任务状态
+status = client.query_scraper_task_status(task_id)
+if status["data"]["status"] == "成功":
+    result = client.download_scraper_task_result(task_id, result_type="json")
 
 # 搜索类：直接打搜索引擎接口
 result = google_search(q="pizza", client=client)
 ```
 
-也可以不传 `client`，使用默认 client（读取 `DATAIFY_TOKEN` 环境变量）：
+也可以不传 `client`，使用默认 client（优先读取 `DATAIFY_API_TOKEN`，兼容 `DATAIFY_TOKEN`）：
+
+```bash
+export DATAIFY_API_TOKEN="..."
+```
 
 ```python
 from dataify_sdk.tools.googlesearch import google_search
 
 result = google_search(q="pizza")
 ```
+
+`client.query_scraper_task_status(...)` 会返回任务状态 JSON，`data.status` 常见值为 `处理中`、`成功`、`失败`。任务成功后可用 `client.download_scraper_task_result(task_id, result_type="json")` 下载最终结果；`result_type` 支持 `json`、`csv`、`xlsx`。
 
 ## API 设计
 

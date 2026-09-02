@@ -41,7 +41,7 @@ def google_maps(q: str, data: str = '', data_cid: str = '', gl: str = '', google
     place_id: 定义 Google 地图中地点的唯一引用。地点 ID 可用于大多数地点，包括企业、地标、公园和交叉路口。  [默认: (空)]
     data_cid: 定义地点的 Google CID（客户标识符）。data_cid 和 place_id 不能同时使用。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果。设为 true 可跳过缓存，设为 false（默认）则使用缓存结果。缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

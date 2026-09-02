@@ -26,7 +26,7 @@ def ins_reel_by_url(file_name: str = '{{TasksID}}', url: str = '', client: Datai
     ----------
     url: URL，该参数用于指定待采集的 Instagram 的访问 URL 地址。ins_reel_by-url 默认值为 https://www.instagram.com/reel/C5Rdyj_q7YN/，ins_allreel_by-url 默认值为 https://www.instagram.com/billieeilish，ins_reel_by-listurl 默认值为 https://www.instagram.com/espn。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -50,7 +50,7 @@ def ins_allreel_by_url(file_name: str = '{{TasksID}}', client: DataifyClient | N
     Parameters
     ----------
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
     }
@@ -73,7 +73,7 @@ def ins_reel_by_listurl(file_name: str = '{{TasksID}}', client: DataifyClient | 
     Parameters
     ----------
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
     }

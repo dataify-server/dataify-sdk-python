@@ -26,7 +26,7 @@ def google_shopping_by_keywords(file_name: str = '{{TasksID}}', keyword: str = '
     ----------
     keyword: 产品关键词，该参数用于指定关键字来收集产品数据。用于 google_shopping_by-keywords，默认值为 iphone。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,

@@ -29,7 +29,7 @@ def youtube_comment_by_id(file_name: str = '{{TasksID}}', load_replies: str = '1
     num_of_comments: 评论数量，该参数用于指定需要采集的评论数量。用于 youtube_comment_by-id，默认值为 10。  [默认: 10]
     sort_by: 评论排序方式，该参数用于指定 YouTube 评论排序。用于 youtube_comment_by-id，可选值：Top comments、Newest first，默认值为 Top comments。  [默认: Top comments]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "video_id": video_id,

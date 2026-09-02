@@ -26,7 +26,7 @@ def indeed_job_listings_by_job_url(file_name: str = '{{TasksID}}', job_url: str 
     ----------
     job_url: Indeed职位URL，该参数用于指定采集的 Indeed 职位 URL。用于 indeed_job-listings_by-job-url，默认值为 https://fr.indeed.com/viewjob?jk=55b3e5dfa0c2ff66。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "job_url": job_url,

@@ -41,7 +41,7 @@ def google_search(ai_overview: str = '', cr: str = '', device: str = 'desktop', 
     render_js: 如果为 true，系统将使用浏览器执行页面脚本并返回完整渲染后的 HTML。开启后会显著增加采集耗时，请按需使用。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果。设为 true 可跳过缓存，设为 false（默认）则使用缓存结果。缓存搜索免费，且不计入搜索统计。  [默认: false]
     ai_overview: 控制是否获取 Google 搜索结果中的 AI 概览（AI Overview）内容。成功获取 AI 概览通常计为 1 次响应；当首次请求仅返回 page_token 时，系统自动进行的第二次请求将额外计费，总共消耗 2 次响应。  [默认: (空)]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

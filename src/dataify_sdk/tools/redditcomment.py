@@ -28,7 +28,7 @@ def reddit_comment_by_url(comment_limit: str = '', days_back: str = '', file_nam
     days_back: 发布天数限制，该参数用于指定采集您输入的天数内发布的所有评论。默认值为 10。  [默认: (空)]
     comment_limit: 回复数量限制，该参数用于指定采集评论时返回的回复评论数量。默认值为 5。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

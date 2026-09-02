@@ -26,7 +26,7 @@ def tiktok_shop_by_url(file_name: str = '{{TasksID}}', url: str = '', client: Da
     ----------
     url: TikTok商店URL，该参数用于指定待采集的 TikTok 商店网址。用于 tiktok_shop_by-url，默认值为 https://www.tiktok.com/shop/pdp/long-sleeve-crew-neck-tee-3-pack-by-galaxy-by-harvic-cotton-blend/1729461570693075200。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

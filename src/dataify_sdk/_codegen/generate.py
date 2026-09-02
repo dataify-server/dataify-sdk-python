@@ -434,7 +434,10 @@ def render_scraper_function(
     ]
     for p in sig_params:
         doc.append(_doc_param_line(p, p["upstream"]))
-    doc.append("    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。")
+    doc.append(
+        "    client: 可选 DataifyClient 实例;不传则使用默认 client("
+        "优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。"
+    )
     doc.append('    """')
     doc.append("    params_obj = {")
     doc.extend(body_assign)
@@ -492,7 +495,10 @@ def render_serp_function(
     ]
     for p in sig_params:
         doc.append(_doc_param_line(p, p["upstream"]))
-    doc.append("    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。")
+    doc.append(
+        "    client: 可选 DataifyClient 实例;不传则使用默认 client("
+        "优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。"
+    )
     doc.append('    """')
     doc.append("    form = {")
     doc.extend(body_assign)

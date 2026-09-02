@@ -26,7 +26,7 @@ def google_play_store_information_by_url(app_url: str = '', file_name: str = '{{
     ----------
     app_url: App URL，Google Play 网站上的 App URL。用于 google-play-store_information_by-url，默认值为 https://play.google.com/store/apps/details?id=com.linkedin.android。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "app_url": app_url,

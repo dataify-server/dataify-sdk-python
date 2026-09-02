@@ -35,7 +35,7 @@ def google_play(age: str = '', apps_category: str = '', chart: str = '', gl: str
     store_device: 该参数定义用于排序结果的设备。此参数不能与 apps_category 或 q 参数一起使用。可用值包括 phone、tablet、tv、chromebook、watch、car。  [默认: (空)]
     age: 该参数定义年龄段子类别。age 仅在 apps_category=FAMILY（儿童应用）时使用。可用值包括 AGE_RANGE1、AGE_RANGE2、AGE_RANGE3。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果。将 no_cache 设为 true 可跳过缓存，设为 false（默认）则使用缓存结果。缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

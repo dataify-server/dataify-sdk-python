@@ -26,7 +26,7 @@ def crunchbase_company_by_url(file_name: str = '{{TasksID}}', url: str = '', cli
     ----------
     url: Crunchbase URL，该参数用于指定采集 Crunchbase 中的公司 URL。用于 crunchbase_company_by-url，默认值为 https://www.crunchbase.com/organization/aisci。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -51,7 +51,7 @@ def crunchbase_company_by_keywords(file_name: str = '{{TasksID}}', keyword: str 
     ----------
     keyword: 关键词，该参数用于指定采集 Crunchbase 中搜索公司的关键词。用于 crunchbase_company_by-keywords，默认值为 NetBooster。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,

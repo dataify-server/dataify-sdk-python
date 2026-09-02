@@ -28,7 +28,7 @@ def google_finance(hl: str = '', json_: str = '1', no_cache: str = 'false', q: s
     hl: 该参数定义 Google 职位搜索要使用的语言。它是一个两位数的语言代码，例如 en 代表英语，es 代表西班牙语，fr 代表法语。  [默认: (空)]
     window: 该参数用于设置图表的时间范围。可设置为 1D - 1 天（默认），5D - 5 天，1M - 1 个月，6M - 6 个月，YTD - 年初至今，1Y - 1 年，5Y - 5 年，MAX - 最大值。  [默认: 1D]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果。将 no_cache 设为 true 可跳过缓存，设为 false（默认）则使用缓存结果。缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

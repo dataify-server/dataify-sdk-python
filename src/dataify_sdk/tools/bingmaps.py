@@ -31,7 +31,7 @@ def bing_maps(count: str = '', cp: str = '', first: str = '0', json_: str = '1',
     first: 该参数控制本地结果的偏移量。此参数默认为 0。例如，当 count=10 时，第二页结果从 first=10 开始。  [默认: 0]
     count: 该参数控制每页的结果数量。此参数仅为建议值，可能无法反映返回的结果数。每页最大结果为 10。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果；将 no_cache 设为 true 可跳过缓存，设为 false（默认）则使用缓存结果；缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

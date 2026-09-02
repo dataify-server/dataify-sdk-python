@@ -26,7 +26,7 @@ def ins_comment_by_posturl(file_name: str = '{{TasksID}}', posturl: str = '', cl
     ----------
     posturl: 帖子 URL，该参数用于指定待采集的 Instagram 的帖子 URL。用于 ins_comment_by-posturl，默认值为 https://www.instagram.com/cats_of_instagram/reel/C4GLo_eLO2e/。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "posturl": posturl,

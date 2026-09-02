@@ -26,7 +26,7 @@ def glassdoor_joblistings_by_url(file_name: str = '{{TasksID}}', url: str = '', 
     ----------
     url: 列表网址或招聘搜索链接，该参数用于指定采集 Glassdoor 职位列表网址或 Glassdoor 招聘信息的搜索链接。用于 glassdoor_joblistings_by-url 和 glassdoor_joblistings_by-listurl，默认值按文档为同一个 Glassdoor 职位 URL。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -53,7 +53,7 @@ def glassdoor_joblistings_by_keywords(country: str = 'US', file_name: str = '{{T
     location: 地点，该参数用于指定采集特定位置的招聘信息。用于 glassdoor_joblistings_by-keywords，默认值为 New York。  [默认: New York]
     country: 国家，该参数用于指定采集招聘信息的国家。接口取 country 选项的 typeValue，默认按确认使用 US。  [默认: US]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,
@@ -80,7 +80,7 @@ def glassdoor_joblistings_by_listurl(file_name: str = '{{TasksID}}', url: str = 
     ----------
     url: 列表网址或招聘搜索链接，该参数用于指定采集 Glassdoor 职位列表网址或 Glassdoor 招聘信息的搜索链接。用于 glassdoor_joblistings_by-url 和 glassdoor_joblistings_by-listurl，默认值按文档为同一个 Glassdoor 职位 URL。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

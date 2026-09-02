@@ -26,7 +26,7 @@ def amazon_product_by_asin(asin: str = 'B0BZYCJK89', file_name: str = '{{TasksID
     ----------
     asin: ASIN，该参数用于指定采集 Amazon 产品的唯一标识符。ASIN 通常是一个 10 位字母和数字的组合，比如 B0BZYCJK89。用于 amazon_product_by-asin。  [默认: B0BZYCJK89]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "asin": asin,
@@ -52,7 +52,7 @@ def amazon_product_by_url(file_name: str = '{{TasksID}}', url: str = '', zip_cod
     url: URLs，该参数用于指定待采集的访问 URL 地址。用于 amazon_product_by-url、amazon_product_by-category-url；也可用于 amazon_product_by-best-sellers。  [默认: (空)]
     zip_code: 邮政编码，该参数用于指定采集页面中配送区域的邮政编码。用于 amazon_product_by-url，默认 94107。  [默认: 94107]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -81,7 +81,7 @@ def amazon_product_by_keywords(file_name: str = '{{TasksID}}', highest_price: st
     lowest_price: 最低价格，该参数用于指定要筛选的最低商品价格。用于 amazon_product_by-keywords。  [默认: 20]
     highest_price: 最高价格，该参数用于指定要筛选的最高商品价格。用于 amazon_product_by-keywords。  [默认: 50]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,
@@ -112,7 +112,7 @@ def amazon_product_by_category_url(collect_subcategories: str = '', file_name: s
     sort_by: 排序方式。用于 amazon_product_by-category-url，仅传 cn 列：畅销排行、最新上架、平均评价、价格：从高到低、价格：从低到高、精选推荐。默认畅销排行。  [默认: 畅销排行]
     collect_subcategories: 收集子类别，该参数用于指定在主类别下要采集的子类别商品范围。仅在传入非空值时提交。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -141,7 +141,7 @@ def amazon_product_by_best_sellers(file_name: str = '{{TasksID}}', page_turning:
     url: URLs，该参数用于指定待采集的访问 URL 地址。用于 amazon_product_by-url、amazon_product_by-category-url；也可用于 amazon_product_by-best-sellers。  [默认: (空)]
     page_turning: 采集页数，请输入要采集多少页的产品。用于 amazon_product_by-keywords、amazon_product_by-category-url、amazon_product_by-best-sellers。关键词采集默认 2，其它列表采集默认 1。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

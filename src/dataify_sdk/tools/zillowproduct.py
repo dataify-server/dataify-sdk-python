@@ -30,7 +30,7 @@ def zillow_product_by_filter(HomeType: str = '', days_on_zillow: str = '', file_
     days_on_zillow: 在zillow上的日子，该参数用于指定采集发布在 Zillow 网站多久时长的房屋。可选值：Any、1 day、7 days、14 days、30 days、90 days、6 months、12 months、24 months、36 months。默认值为 Any。  [默认: (空)]
     maximum: 最大数量，该参数用于指定采集的最大数量。默认值为 10。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keywords-location": keywords_location,

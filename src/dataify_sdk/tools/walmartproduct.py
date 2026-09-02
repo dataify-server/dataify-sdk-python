@@ -27,7 +27,7 @@ def walmart_product_by_url(all_variations: str = '', file_name: str = '{{TasksID
     url: Walmart URL，该参数用于指定待采集的 Walmart 产品 URL。用于 walmart_product_by-url，默认值为 https://www.walmart.com/ip/HI-CHEW-Stand-Up-Pouch-Getaway-Mix-11-65oz/12284762931?athAsset=eyJhdGhjcGlkIjoiMTIyODQ3NjI5MzEiLCJhdGhzdGlkIjoiQ1MwNTV+Q1MwMDR+Q1MwOTgiLCJhdGhlZSI6eyJhIjoyNy44NCwiYiI6Mjk1MS40MSwidyI6MC4wMDk0MjcxMjc3OTA0NzcxMjMsImwiOjAuNX0sImF0aHBvc2IiOiI4IiwiYXRoYW5jaWQiOiIxMDE2NDUwNzU1IiwiYXRocmsiOjAuMH0%3D&athena=true&adsRedirect=true。  [默认: (空)]
     all_variations: 所有变体，该参数用于指定是否收集所有产品变量，设置为 true 为收集。参数值为 true 或 false；walmart_product_by-url 默认 true，其余采集器默认 false。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -55,7 +55,7 @@ def walmart_product_by_category_url(all_variations: str = '', category_url: str 
     all_variations: 所有变体，该参数用于指定是否收集所有产品变量，设置为 true 为收集。参数值为 true 或 false；walmart_product_by-url 默认 true，其余采集器默认 false。  [默认: (空)]
     page_turning: 页数限制，该参数用于指定采集结果数量的限制（请输入页数）。walmart_product_by-category-url 默认 1；walmart_product_by-keywords 默认 2。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "category_url": category_url,
@@ -83,7 +83,7 @@ def walmart_product_by_sku(all_variations: str = '', file_name: str = '{{TasksID
     sku: SKU，该参数用于指定待采集的 SKU 产品唯一代码。用于 walmart_product_by-sku，默认值为 439179861。  [默认: (空)]
     all_variations: 所有变体，该参数用于指定是否收集所有产品变量，设置为 true 为收集。参数值为 true 或 false；walmart_product_by-url 默认 true，其余采集器默认 false。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "sku": sku,
@@ -112,7 +112,7 @@ def walmart_product_by_keywords(all_variations: str = '', domain: str = '', file
     all_variations: 所有变体，该参数用于指定是否收集所有产品变量，设置为 true 为收集。参数值为 true 或 false；walmart_product_by-url 默认 true，其余采集器默认 false。  [默认: (空)]
     page_turning: 页数限制，该参数用于指定采集结果数量的限制（请输入页数）。walmart_product_by-category-url 默认 1；walmart_product_by-keywords 默认 2。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,

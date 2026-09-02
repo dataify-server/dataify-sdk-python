@@ -26,7 +26,7 @@ def github_repository_by_repo_url(file_name: str = '{{TasksID}}', repo_url: str 
     ----------
     repo_url: 仓库URL，该参数用于指定要采集的仓库 URL。用于 github_repository_by-repo-url，默认值为 https://github.com/TheAlgorithms/Python。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "repo_url": repo_url,
@@ -53,7 +53,7 @@ def github_repository_by_search_url(file_name: str = '{{TasksID}}', max_num: str
     page_turning: 页数限制，该参数用于指定采集结果数量的限制。用于 github_repository_by-search-url，默认值为 1。  [默认: (空)]
     max_num: 最大仓库数量，该参数用于指定采集的最大仓库数量。用于 github_repository_by-search-url，默认值为 15。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "search_url": search_url,
@@ -80,7 +80,7 @@ def github_repository_by_url(file_name: str = '{{TasksID}}', url: str = '', clie
     ----------
     url: URL，该参数用于指定要采集的代码URL。用于 github_repository_by-url，默认值为 https://github.com/TheAlgorithms/Python/blob/master/divide_and_conquer/power.py。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

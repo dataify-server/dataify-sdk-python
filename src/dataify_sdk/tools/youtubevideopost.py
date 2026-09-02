@@ -29,7 +29,7 @@ def youtube_video_post_by_url(file_name: str = '{{TasksID}}', num_of_posts: str 
     start_index: 起始条数，该参数用于指定从第几条视频开始采集信息。用于 youtube_video-post_by-url，默认值为 1。  [默认: 1]
     num_of_posts: 帖子数量，此参数用于指定要采集的帖子数量。不同采集器按文档默认值提交。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -62,7 +62,7 @@ def youtube_video_post_by_search_filters(duration: str = 'Under 3 minutes', feat
     upload_date: 上传日期。用于 youtube_video-post_by-search-filters，可传 上一小时、今天、本周、本月、今年、全部；默认 上一小时。  [默认: 上一小时]
     num_of_posts: 帖子数量，此参数用于指定要采集的帖子数量。不同采集器按文档默认值提交。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword_search": keyword_search,
@@ -93,7 +93,7 @@ def youtube_video_post_by_hashtag(file_name: str = '{{TasksID}}', hashtag: str =
     hashtag: 话题标签，按标签筛选视频，请参考 https://www.youtube.com/hashtag。用于 youtube_video-post_by-hashtag，默认值为 shopping。  [默认: shopping]
     num_of_posts: 帖子数量，此参数用于指定要采集的帖子数量。不同采集器按文档默认值提交。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "hashtag": hashtag,
@@ -120,7 +120,7 @@ def youtube_video_post_by_podcast_url(file_name: str = '{{TasksID}}', num_of_pos
     url: URL。用于频道 Video URL、播客 URL 或探索 URL；不同采集器未传时按文档默认 URL 提交。  [默认: (空)]
     num_of_posts: 帖子数量，此参数用于指定要采集的帖子数量。不同采集器按文档默认值提交。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -147,7 +147,7 @@ def youtube_video_post_by_keyword(file_name: str = '{{TasksID}}', keyword: str =
     keyword: 关键词。用于 youtube_video-post_by-keyword，默认值为 top videos。  [默认: top videos]
     num_of_posts: 帖子数量，此参数用于指定要采集的帖子数量。不同采集器按文档默认值提交。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,
@@ -174,7 +174,7 @@ def youtube_video_post_by_explore(all_tabs: str = '', file_name: str = '{{TasksI
     url: URL。用于频道 Video URL、播客 URL 或探索 URL；不同采集器未传时按文档默认 URL 提交。  [默认: (空)]
     all_tabs: 所有标签页。用于 youtube_video-post_by-explore，参数值为 true 或 false，默认 true。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

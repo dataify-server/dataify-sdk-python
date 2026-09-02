@@ -28,7 +28,7 @@ def amazon_product_list_by_keywords_domain(domain: str = 'https://www.amazon.com
     domain: 域名，请输入需要搜索关键词的主域名，例如：https://www.amazon.com。用于 amazon_product-list_by-keywords-domain，默认值为 https://www.amazon.com/。  [默认: https://www.amazon.com/]
     page_turning: 采集页数，请输入要采集多少页的产品。即如果输入 2，就是需要把搜索结果页的第一页、第二页的所有产品都采集过来。默认值为 1。  [默认: 1]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,

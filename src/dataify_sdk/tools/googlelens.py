@@ -31,7 +31,7 @@ def google_lens(country: str = '', hl: str = '', json_: str = '1', no_cache: str
     q: 该参数定义在 Google Lens 搜索中一并使用的搜索查询。仅当 type 为 all、visual_matches 或 products 时适用。  [默认: (空)]
     safe: 该参数定义成人内容的过滤级别。可设置为 active 或 off。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果；将 no_cache 设置为 true 可跳过缓存，设置为 false（默认）则使用缓存结果；缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "url": url,

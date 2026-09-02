@@ -39,7 +39,7 @@ def google_shopping(free_shipping: str = '', gl: str = '', google_domain: str = 
     on_sale: 仅显示促销产品。该参数会覆盖嵌入到 shoprs 参数中的相应过滤器。  [默认: (空)]
     small_business: 仅显示来自小企业的产品。该参数会覆盖嵌入到 shoprs 参数中的相应过滤器。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果。设为 true 可跳过缓存，设为 false（默认）则使用缓存结果。缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

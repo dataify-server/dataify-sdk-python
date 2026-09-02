@@ -27,7 +27,7 @@ def tiktok_profiles_by_url(country: str = '', file_name: str = '{{TasksID}}', ur
     url: TikTok 个人资料URL，该参数用于指定待采集的 TikTok 个人资料网址。用于 tiktok_profiles_by-url，默认值为 https://www.tiktok.com/@fofimdmell。  [默认: (空)]
     country: 国家，该参数用于指定要搜索的国家。接口按文档示例取值，默认值为 us。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -55,7 +55,7 @@ def tiktok_profiles_by_listurl(country: str = '', file_name: str = '{{TasksID}}'
     country: 国家，该参数用于指定要搜索的国家。接口按文档示例取值，默认值为 us。  [默认: (空)]
     page_turning: 页数限制，该参数用于指定采集结果数量的限制（请输入页数）。用于 tiktok_profiles_by-listurl，默认值为 1。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "search_url": search_url,

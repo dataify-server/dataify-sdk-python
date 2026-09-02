@@ -37,7 +37,7 @@ def google_videos(q: str, filter: str = '1', gl: str = '', google_domain: str = 
     safe: 定义成人内容的过滤级别。可以设置为 active 或 off，默认情况下 Google 会模糊处理露骨内容。  [默认: (空)]
     nfpr: 当原始查询拼写错误时，定义是否排除来自自动更正查询的结果。可以设置为 1 以排除这些结果，或设置为 0 以包含它们（默认）。  [默认: (空)]
     filter: 定义“类似结果”和“省略结果”的过滤器是开启还是关闭。可以设置为 1（默认）以启用这些过滤器，或设置为 0 以禁用这些过滤器。  [默认: 1]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

@@ -27,7 +27,7 @@ def google_comment_by_url(days_limit: str = '', file_name: str = '{{TasksID}}', 
     url: Google 地图 URL，该参数用于指定待采集的 Google 地图访问链接信息。用于 google_comment_by-url，默认值为 https://www.google.com/maps/place/Waterfront+Botanical+Gardens/@38.2630366,-85.7288454,15z/data=!4m8!3m7!1s0x8869731e16a7bdbd:0x2f5d238fefed7ca1!8m2!3d38.2632837!4d-85.7239738!9m1!1b1!16s%2Fg%2F11c709xzzx?hl=en&entry=ttu。  [默认: (空)]
     days_limit: 天数限制，该参数用于指定待采集的 Google 地图评论发布天数限制，即从当前日期开始向前检索评论的天数。默认值为 20。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

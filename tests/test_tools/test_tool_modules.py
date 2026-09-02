@@ -58,10 +58,10 @@ def test_google_search_request(captured_request):
 
 
 def test_default_client_uses_env(monkeypatch, captured_request):
-    monkeypatch.setenv("DATAIFY_TOKEN", "env-token")
+    monkeypatch.setenv("DATAIFY_API_TOKEN", "env-token")
     from dataify_sdk.tools.twitterpost import twitter_post_by_profileurl
 
-    # no client passed -> default client reads DATAIFY_TOKEN
+    # no client passed -> default client reads DATAIFY_API_TOKEN
     twitter_post_by_profileurl(url="https://x.com/foo")
     req = captured_request["req"]
     assert req.full_url.endswith("/builder?platform=1")

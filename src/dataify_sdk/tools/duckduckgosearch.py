@@ -32,7 +32,7 @@ def duckduckgo_search(df: str = '', json_: str = '1', kl: str = '', m: str = '10
     start: 该参数定义结果偏移量，它跳过指定数量的结果。当 start 设置为 0 或留空时，最多可返回 25 个自然结果；当 start 大于 0 时，最多可返回 10 个自然结果。DuckDuckGo 可能返回重复结果或数量可变的结果，这在使用较大的 start 和 m 参数时更可能发生。  [默认: 0]
     m: 该参数定义要返回的最大结果数量。默认值：10，最小值：1，最大值：50。当 start 设置为 0 或留空时，最多可返回 25 个自然结果。DuckDuckGo 可能返回重复结果或数量可变的结果，这在使用较大的 start 和 m 参数时更可能发生。m 和 search_assist 不能一起使用。  [默认: 10]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果；将 no_cache 设为 true 可跳过缓存，设为 false（默认）则使用缓存结果；缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

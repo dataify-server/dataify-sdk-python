@@ -26,7 +26,7 @@ def glassdoor_company_by_url(file_name: str = '{{TasksID}}', url: str = '', clie
     ----------
     url: Glassdoor URL，该参数用于指定采集 Glassdoor 公司网址。用于 glassdoor_company_by-url 和 glassdoor_company_by-listurl；by-url 默认值为 https://www.glassdoor.co.uk/Overview/Working-at-Apple-EI_IE1138.11,16.htm，by-listurl 默认值为 https://www.glassdoor.com/Explore/browse-companies.htm?filterType=RATING_OVERALL&locId=1347&locType=S&locName=Texas%252C%2520US&occ=Manager&page=1&overall_rating_low=1。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
@@ -54,7 +54,7 @@ def glassdoor_company_by_inputfilter(Job_title: str = '', company_name: str = 'T
     industries: 行业，该参数用于指定采集公司的行业搜索关键词。用于 glassdoor_company_by-inputfilter，默认值为 Information Technology。  [默认: Information Technology]
     Job_title: 职位，该参数用于指定采集公司的含有的职位关键词。用于 glassdoor_company_by-inputfilter，严格按文档字段名 Job title 提交，默认值为 Data。  [默认: (空)] (上游字段: Job title)
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "location": location,
@@ -83,7 +83,7 @@ def glassdoor_company_by_keywords(file_name: str = '{{TasksID}}', max_search_res
     search_url: 搜索网址，该参数是您需要输入基于公司搜索词 URL。用于 glassdoor_company_by-keywords，默认值为 https://www.glassdoor.com/Search/results.htm?keyword=Apple。  [默认: (空)]
     max_search_results: 最大搜索结果数，该参数用于指定采集公司信息的最大数量。用于 glassdoor_company_by-keywords，默认值为 5。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "search_url": search_url,
@@ -109,7 +109,7 @@ def glassdoor_company_by_listurl(file_name: str = '{{TasksID}}', url: str = '', 
     ----------
     url: Glassdoor URL，该参数用于指定采集 Glassdoor 公司网址。用于 glassdoor_company_by-url 和 glassdoor_company_by-listurl；by-url 默认值为 https://www.glassdoor.co.uk/Overview/Working-at-Apple-EI_IE1138.11,16.htm，by-listurl 默认值为 https://www.glassdoor.com/Explore/browse-companies.htm?filterType=RATING_OVERALL&locId=1347&locType=S&locName=Texas%252C%2520US&occ=Manager&page=1&overall_rating_low=1。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

@@ -7,11 +7,18 @@ Typical usage::
     from dataify_sdk.tools.amazonproduct import amazon_product_by_asin
 
     client = DataifyClient(token="YOUR_TOKEN")
-    result = amazon_product_by_asin(asin="B0BZYCJK89", client=client)
+    task = amazon_product_by_asin(asin="B0BZYCJK89", client=client)
+    task_id = task["data"]["task_id"]
+    status = client.query_scraper_task_status(task_id)
+    if status["data"]["status"] == "成功":
+        result = client.download_scraper_task_result(task_id, result_type="json")
 
-or, using the default client (token from ``DATAIFY_TOKEN``)::
+or, using the default client (token from ``DATAIFY_API_TOKEN``, with
+``DATAIFY_TOKEN`` still accepted)::
 
-    result = amazon_product_by_asin(asin="B0BZYCJK89")
+    task = amazon_product_by_asin(asin="B0BZYCJK89")
+    client = DataifyClient()
+    status = client.query_scraper_task_status(task["data"]["task_id"])
 """
 
 from __future__ import annotations

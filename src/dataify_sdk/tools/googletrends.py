@@ -36,7 +36,7 @@ def google_trends(cat: str = '0', csv: str = '', data_type: str = '', date: str 
     csv: 用于检索 CSV 结果。设置为 true 可将 CSV 结果作为数组检索。可用值为 true 或 false。  [默认: (空)]
     include_low_search_volume: 用于在结果中包含低搜索量区域。设置为 true 以在结果中包含低搜索量区域。可用值为 true 或 false。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果。设为 true 可跳过缓存，设为 false（默认）则使用缓存结果。缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

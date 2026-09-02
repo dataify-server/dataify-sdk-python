@@ -35,7 +35,7 @@ def bing_videos(cc: str = '', date: str = '', first: str = '0', json_: str = '1'
     source_site: 该参数用于按来源过滤视频。可用值包括：dailymotion.com、vimeo.com、metacafe.com、hulu.com、vevo.com、myspace.com、mtv.com、cbsnews.com、foxnews.com、cnn.com、msn.com。  [默认: (空)]
     price: 该参数用于按价格过滤视频。可用值：free（免费）、paid（付费）。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果；将 no_cache 设为 true 可跳过缓存，设为 false（默认）则使用缓存结果；缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

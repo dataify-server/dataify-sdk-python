@@ -26,7 +26,7 @@ def youtube_audio_by_url(file_name: str = '{{TasksID}}', url: str = '', client: 
     ----------
     url: URLs，该参数用于指定待采集的访问 URL 地址。用于 youtube_audio_by-url，默认值为 https://www.youtube.com/watch?v=_SdpvpvVrLY。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

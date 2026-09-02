@@ -37,7 +37,7 @@ def bing_images(age: str = '', aspect: str = '', cc: str = '', color2: str = '',
     age: 该参数用于按日期过滤图片。可用值：lt1440 - 过去 24 小时，lt10080 - 过去一周，lt43200 - 过去一个月，lt525600 - 过去一年。  [默认: (空)]
     license: 该参数用于按使用许可过滤图片。可用值：Type-Any - 所有 Creative Commons，L1 - Public Domain，L2_L3_L4_L5_L6_L7 - 免费共享和使用，L2_L3_L4 - 免费共享和商业使用，L2_L3_L5_L6 - 免费修改、共享和使用，L2_L3 - 免费修改、共享和商业使用。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果；将 no_cache 设为 true 可跳过缓存，设为 false（默认）则使用缓存结果；缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "q": q,

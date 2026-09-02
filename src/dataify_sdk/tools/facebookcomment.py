@@ -29,7 +29,7 @@ def facebook_comment_by_comments_url(comments_sort: str = '', file_name: str = '
     limit_records: 回复数量上限，该参数用于指定采集的最多回复数量。当值为空时，采集数量默认 1 页（最多 10 条）。默认值为 10。  [默认: (空)]
     comments_sort: 评论排序方式。可选值：All comments、Most Relevent、Newest；默认值为 All comments。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

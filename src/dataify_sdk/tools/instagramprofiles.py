@@ -26,7 +26,7 @@ def ins_profiles_by_username(file_name: str = '{{TasksID}}', username: str = '',
     ----------
     username: Instagram 用户名，该参数用于指定待采集的 Instagram 的用户名信息。用于 ins_profiles_by-username，默认值为 zoobarcelona。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "username": username,
@@ -51,7 +51,7 @@ def ins_profiles_by_profileurl(file_name: str = '{{TasksID}}', profileurl: str =
     ----------
     profileurl: 个人资料 URL，该参数用于指定待采集产品的个人资料访问 URL。用于 ins_profiles_by-profileurl，默认值为 https://www.instagram.com/cats_of_world_/。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "profileurl": profileurl,

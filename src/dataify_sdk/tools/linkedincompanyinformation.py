@@ -26,7 +26,7 @@ def linkedin_company_information_by_url(file_name: str = '{{TasksID}}', url: str
     ----------
     url: 公司URL，该参数用于指定要采集的公司URL。用于 linkedin_company_information_by-url，默认值为 https://www.linkedin.com/company/dynamo-software。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,

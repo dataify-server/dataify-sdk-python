@@ -55,7 +55,7 @@ def google_flights(adults: str = '1', arrival_id: str = '', bags: str = '0', chi
     max_duration: 定义最长飞行时长（以分钟为单位）。例如 1500 表示 25 小时。  [默认: (空)]
     departure_token: 用于选择航班并获取返程航班（对于往返航班）或行程下一段的航班（对于多城市航班）。在出发航班结果中找到此令牌。它不能与 booking_token 一起使用。  [默认: (空)]
     no_cache: 默认情况下，5 分钟内缓存相同参数的搜索结果。设为 true 可跳过缓存，设为 false（默认）则使用缓存结果。缓存搜索免费，且不计入搜索统计。  [默认: false]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     form = {
         "departure_id": departure_id,

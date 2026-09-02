@@ -26,7 +26,7 @@ def indeed_companies_info_by_company_list_url(company_list_url: str = '', file_n
     ----------
     company_list_url: Indeed公司列表URL，该参数用于指定采集公司列表的URL。用于 indeed_companies-info_by-company-list-url，默认值为 https://www.indeed.com/companies/browse-companies。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "company_list_url": company_list_url,
@@ -51,7 +51,7 @@ def indeed_companies_info_by_keyword(file_name: str = '{{TasksID}}', keyword: st
     ----------
     keyword: 公司关键词，该参数用于指定采集公司的关键词。用于 indeed_companies-info_by-keyword，默认值为 openai。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "keyword": keyword,
@@ -77,7 +77,7 @@ def indeed_companies_info_by_industry_and_state(file_name: str = '{{TasksID}}', 
     industry: Indeed行业，该参数用于指定采集公司所属行业。用于 indeed_companies-info_by-industry-and-state，默认值为 Accounting & Tax。  [默认: (空)]
     state: Indeed 地区，该参数用于指定采集公司所在地区。用于 indeed_companies-info_by-industry-and-state，默认值为 Alabama - 60 companies。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "industry": industry,
@@ -103,7 +103,7 @@ def indeed_companies_info_by_company_url(company_url: str = '', file_name: str =
     ----------
     company_url: Indeed公司URL，该参数用于指定要采集的公司URL。用于 indeed_companies-info_by-company-url，默认值为 https://www.indeed.com/cmp/Allstate-Insurance。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "company_url": company_url,

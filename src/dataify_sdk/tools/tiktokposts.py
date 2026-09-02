@@ -26,7 +26,7 @@ def tiktok_posts_by_listurl(file_name: str = '{{TasksID}}', url: str = '', clien
     ----------
     url: URL，此参数用于指定要获取的列表 URL。用于 tiktok_posts_by-listurl，默认值为 https://www.tiktok.com/discover/dog。  [默认: (空)]
     file_name: Builder file_name 字段。不传默认为 {{TasksID}}。  [默认: {{TasksID}}]
-    client: 可选 DataifyClient 实例;不传则使用默认 client(读取 DATAIFY_TOKEN)。
+    client: 可选 DataifyClient 实例;不传则使用默认 client(优先读取 DATAIFY_API_TOKEN, 兼容 DATAIFY_TOKEN)。
     """
     params_obj = {
         "url": url,
