@@ -15,6 +15,7 @@ from dataify_sdk.tools.bingsearch import bing_search
 from dataify_sdk.tools.bingshopping import bing_shopping
 from dataify_sdk.tools.bingvideos import bing_videos
 from dataify_sdk.tools.bookinghotellist import booking_hotellist_by_url
+from dataify_sdk.tools.chatgptanswer import chatgpt_answer_by_keywords, chatgpt_answer_by_url
 from dataify_sdk.tools.crunchbasecompany import crunchbase_company_by_url, crunchbase_company_by_keywords
 from dataify_sdk.tools.duckduckgosearch import duckduckgo_search
 from dataify_sdk.tools.ebayinfo import ebay_ebay_by_url, ebay_ebay_by_category_url, ebay_ebay_by_keywords, ebay_ebay_by_listurl
@@ -94,6 +95,8 @@ __all__ = [
     'bing_shopping',
     'bing_videos',
     'booking_hotellist_by_url',
+    'chatgpt_answer_by_keywords',
+    'chatgpt_answer_by_url',
     'crunchbase_company_by_url',
     'crunchbase_company_by_keywords',
     'duckduckgo_search',

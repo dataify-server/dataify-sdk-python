@@ -27,10 +27,10 @@ def test_module_imports(module):
 
 def test_function_count():
     mods = _all_modules()
-    assert len(mods) == 70
+    assert len(mods) == 71
     import dataify_sdk.tools as pkg
 
-    assert len(pkg.__all__) == 113
+    assert len(pkg.__all__) == 115
 
 
 def test_amazon_product_by_asin_request(captured_request):
@@ -43,6 +43,34 @@ def test_amazon_product_by_asin_request(captured_request):
     assert form["spider_id"] == "amazon_product_by-asin"
     assert form["spider_name"] == "amazon.com"
     assert json.loads(form["spider_parameters"]) == [{"asin": "B0X"}]
+
+
+def test_chatgpt_answer_by_url_request(captured_request):
+    from dataify_sdk.tools.chatgptanswer import chatgpt_answer_by_url
+
+    chatgpt_answer_by_url(
+        chatgpt_url="https://chatgpt.com/?q=pizza", client=DataifyClient(token="t")
+    )
+    req = captured_request["req"]
+    assert req.full_url.endswith("/builder?platform=1")
+    form = decode_form(req)
+    assert form["spider_id"] == "chatgpt_answer_by-url"
+    assert form["spider_name"] == "chatgpt.com"
+    assert json.loads(form["spider_parameters"]) == [
+        {"chatgpt_url": "https://chatgpt.com/?q=pizza"}
+    ]
+
+
+def test_chatgpt_answer_by_keywords_request(captured_request):
+    from dataify_sdk.tools.chatgptanswer import chatgpt_answer_by_keywords
+
+    chatgpt_answer_by_keywords(search_terms="pizza", client=DataifyClient(token="t"))
+    req = captured_request["req"]
+    assert req.full_url.endswith("/builder?platform=1")
+    form = decode_form(req)
+    assert form["spider_id"] == "chatgpt_answer_by-keywords"
+    assert form["spider_name"] == "chatgpt.com"
+    assert json.loads(form["spider_parameters"]) == [{"search_terms": "pizza"}]
 
 
 def test_google_search_request(captured_request):

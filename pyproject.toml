@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "dataify-sdk"
-version = "1.0.0"
+version = "1.2.0"
 description = "Python SDK that calls the Dataify upstream REST API directly (no MCP layer) — web scrapers and search engines."
 readme = "README.md"
 license = {text = "MIT"}
