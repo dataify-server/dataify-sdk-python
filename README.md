@@ -7,7 +7,7 @@ Python 客户端库，**直接调用** [Dataify](https://dashboard.dataify.com) 
 
 - 🔍 **搜索引擎** — Google（17 种）、Bing（6 种）、Yandex、DuckDuckGo，走 `POST /request`
 - 🛒 **平台抓取器** — Amazon、YouTube、TikTok、Facebook、Instagram、Reddit、Twitter/X、LinkedIn、Glassdoor、Indeed、Walmart、Zillow、Airbnb、Booking、Crunchbase、eBay、GitHub 等 45 个采集器，先走 `POST /builder?platform=1`，再可查询任务状态并下载结果
-- 🌐 **AI Web** — 聚合搜索、站点发现、正文提取和结果下载，见 [docs/AI_WEB.md](https://github.com/dataify/dataify-sdk/blob/main/docs/AI_WEB.md)
+- 🌐 **AI Web** — 聚合搜索、站点发现、正文提取和结果下载，见 [docs/AI_WEB.md](https://github.com/dataify-server/dataify-sdk-python/blob/main/docs/AI_WEB.md)
 - 📖 **参数全暴露** — 每个工具函数把上游请求参数、类型、是否必填、中文描述都写在签名与 docstring 里；离线参数手册由维护者通过 `scripts/codegen.py` 生成
 - 🐍 **零依赖** — 仅用标准库 `urllib`，同步 API
 
@@ -81,7 +81,7 @@ page = client.ai_web.extract(
 )
 ```
 
-`search` 支持 `SEARCH_WEB`、`SEARCH_NEWS`、`SEARCH_SHOPPING`、`SEARCH_SCHOLAR` 四种模式。`search`、`map`、`extract` 返回 `AIWebResponse(request_id, outputs)`，其中 `outputs` 统一为数组；`execute` / `execute_raw` 支持动态 operation，`download_result` 通过 `request_id` 下载结果。完整参数和示例见 [`docs/AI_WEB.md`](https://github.com/dataify/dataify-sdk/blob/main/docs/AI_WEB.md)。
+`search` 支持 `SEARCH_WEB`、`SEARCH_NEWS`、`SEARCH_SHOPPING`、`SEARCH_SCHOLAR` 四种模式。`search`、`map`、`extract` 返回 `AIWebResponse(request_id, outputs)`，其中 `outputs` 统一为数组；`execute` / `execute_raw` 支持动态 operation，`download_result` 通过 `request_id` 下载结果。完整参数和示例见 [`docs/AI_WEB.md`](https://github.com/dataify-server/dataify-sdk-python/blob/main/docs/AI_WEB.md)。
 
 ## API 设计
 

@@ -46,7 +46,7 @@ from dataify_sdk.errors import (
     DataifyTimeoutError,
 )
 
-__version__ = "1.3.0"
+__version__ = "1.3.1"
 
 
 
