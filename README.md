@@ -7,7 +7,8 @@ Python 客户端库，**直接调用** [Dataify](https://dashboard.dataify.com) 
 
 - 🔍 **搜索引擎** — Google（17 种）、Bing（6 种）、Yandex、DuckDuckGo，走 `POST /request`
 - 🛒 **平台抓取器** — Amazon、YouTube、TikTok、Facebook、Instagram、Reddit、Twitter/X、LinkedIn、Glassdoor、Indeed、Walmart、Zillow、Airbnb、Booking、Crunchbase、eBay、GitHub 等 45 个采集器，先走 `POST /builder?platform=1`，再可查询任务状态并下载结果
-- 📖 **参数全暴露** — 每个工具函数把上游请求参数、类型、是否必填、中文描述都写在签名与 docstring 里；另见 `docs/api_reference.md`
+- 🌐 **AI Web** — 聚合搜索、站点发现、正文提取和结果下载，见 [docs/AI_WEB.md](https://github.com/dataify/dataify-sdk/blob/main/docs/AI_WEB.md)
+- 📖 **参数全暴露** — 每个工具函数把上游请求参数、类型、是否必填、中文描述都写在签名与 docstring 里；离线参数手册由维护者通过 `scripts/codegen.py` 生成
 - 🐍 **零依赖** — 仅用标准库 `urllib`，同步 API
 
 ## 安装
@@ -55,11 +56,38 @@ result = google_search(q="pizza")
 
 `client.query_scraper_task_status(...)` 会返回任务状态 JSON，`data.status` 常见值为 `处理中`、`成功`、`失败`。任务成功后可用 `client.download_scraper_task_result(task_id, result_type="json")` 下载最终结果；`result_type` 支持 `json`、`csv`、`xlsx`。
 
+## AI Web
+
+AI Web 的搜索、站点发现和正文提取通过 `client.ai_web` 调用，默认使用正式域名 `https://aiwebapi.dataify.com`。测试或私有网关可通过 `AI_WEB_API_BASE_URL` 或 `ai_web_base_url` 覆盖。
+
+```python
+from dataify_sdk import AI_WEB_UNIQUE_IDS, DataifyClient
+
+client = DataifyClient()  # 默认从 DATAIFY_API_TOKEN 读取 token
+
+result = client.ai_web.search(
+    AI_WEB_UNIQUE_IDS.SEARCH_WEB,
+    "OpenAI",
+    max_results=3,
+    source="web",
+)
+print(result.request_id)
+print(result.outputs)
+
+page = client.ai_web.extract(
+    AI_WEB_UNIQUE_IDS.EXTRACT,
+    "https://example.com/article",
+    formats=["markdown"],
+)
+```
+
+`search` 支持 `SEARCH_WEB`、`SEARCH_NEWS`、`SEARCH_SHOPPING`、`SEARCH_SCHOLAR` 四种模式。`search`、`map`、`extract` 返回 `AIWebResponse(request_id, outputs)`，其中 `outputs` 统一为数组；`execute` / `execute_raw` 支持动态 operation，`download_result` 通过 `request_id` 下载结果。完整参数和示例见 [`docs/AI_WEB.md`](https://github.com/dataify/dataify-sdk/blob/main/docs/AI_WEB.md)。
+
 ## API 设计
 
 - **每个 `spider_id` = 一个独立函数**（采集类），例如 `amazon_product_by_asin()`、`amazon_product_by_url()`、`amazon_product_by_keywords()`。
 - **搜索类每个引擎一个函数**，例如 `google_search()`、`bing_search()`、`yandex_search()`。
-- 所有函数签名与 docstring 完整暴露上游参数及其描述；`docs/api_reference.md` 为离线参数手册。
+- 所有函数签名与 docstring 完整暴露上游参数及其描述；离线参数手册由维护者通过 `scripts/codegen.py` 生成。
 - 函数返回解析后的 JSON `dict`（即上游原始响应）。
 
 ## 错误处理

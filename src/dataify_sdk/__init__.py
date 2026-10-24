@@ -23,15 +23,30 @@ or, using the default client (token from ``DATAIFY_API_TOKEN``, with
 
 from __future__ import annotations
 
-from dataify_sdk.client import DataifyClient, get_default_client
+from dataify_sdk.ai_web import (
+    AI_WEB_FORMATS,
+    AI_WEB_UNIQUE_IDS,
+    AIWebFormats,
+    AIWebOperation,
+    AIWebResponse,
+    AIWebService,
+    AIWebUniqueIds,
+    normalize_ai_web_outputs,
+)
+from dataify_sdk.client import (
+    DEFAULT_AI_WEB_BASE_URL,
+    DataifyClient,
+    get_default_client,
+)
 from dataify_sdk.errors import (
     DataifyAPIError,
     DataifyConnectionError,
     DataifyError,
+    DataifyMissingAIWebBaseUrlError,
     DataifyTimeoutError,
 )
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
 
 
@@ -40,8 +55,18 @@ __all__ = [
     "__version__",
     "DataifyClient",
     "get_default_client",
+    "DEFAULT_AI_WEB_BASE_URL",
     "DataifyError",
     "DataifyAPIError",
     "DataifyConnectionError",
     "DataifyTimeoutError",
+    "DataifyMissingAIWebBaseUrlError",
+    "AIWebService",
+    "AIWebResponse",
+    "AIWebOperation",
+    "AIWebUniqueIds",
+    "AIWebFormats",
+    "AI_WEB_UNIQUE_IDS",
+    "AI_WEB_FORMATS",
+    "normalize_ai_web_outputs",
 ]

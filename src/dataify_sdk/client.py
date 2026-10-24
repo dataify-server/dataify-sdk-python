@@ -12,6 +12,10 @@ Dataify MCP server proxies), instead of going through the MCP protocol:
   (query params: ``api_key``, ``task_id``, ``type``)
 * Search engines (Google / Bing / Yandex / DuckDuckGo) -> ``POST {base_url}/request``
   (form fields are the engine-specific parameters plus a fixed ``engine`` value)
+* AI Web search / map / extract -> ``POST {ai_web_base_url}/search``,
+  ``/map`` and ``/extract`` (JSON body; defaults to
+  ``https://aiwebapi.dataify.com`` and can be overridden with
+  ``ai_web_base_url`` or ``AI_WEB_API_BASE_URL``)
 
 Authentication is via a Bearer token, supplied either to the constructor or
 through the ``DATAIFY_API_TOKEN`` environment variable. The legacy
@@ -27,6 +31,7 @@ import urllib.parse
 import urllib.request
 from typing import Any
 
+from dataify_sdk.ai_web import AIWebService
 from dataify_sdk.errors import (
     DataifyAPIError,
     DataifyConnectionError,
@@ -34,9 +39,19 @@ from dataify_sdk.errors import (
 )
 
 DEFAULT_BASE_URL = "https://scraperapi.dataify.com"
+DEFAULT_AI_WEB_BASE_URL = "https://aiwebapi.dataify.com"
 DEFAULT_TIMEOUT = 120
 ENV_TOKEN = "DATAIFY_API_TOKEN"
 LEGACY_ENV_TOKEN = "DATAIFY_TOKEN"
+ENV_AI_WEB_BASE_URL = "AI_WEB_API_BASE_URL"
+
+
+def _resolve_ai_web_base_url(explicit: str | None) -> str:
+    """Resolve the AI Web gateway URL, defaulting to production."""
+    value = (
+        explicit or os.environ.get(ENV_AI_WEB_BASE_URL) or DEFAULT_AI_WEB_BASE_URL
+    ).strip()
+    return value.rstrip("/")
 
 
 def _read_env_token() -> str | None:
@@ -85,6 +100,10 @@ class DataifyClient:
         exposed only for testing / private deployments.
     timeout:
         Per-request timeout in seconds.
+    ai_web_base_url:
+        Base URL of the AI Web gateway. Defaults to
+        ``https://aiwebapi.dataify.com``. The ``AI_WEB_API_BASE_URL``
+        environment variable or an explicit value overrides the default.
     """
 
     def __init__(
@@ -92,6 +111,7 @@ class DataifyClient:
         token: str | None = None,
         base_url: str = DEFAULT_BASE_URL,
         timeout: int = DEFAULT_TIMEOUT,
+        ai_web_base_url: str | None = None,
     ) -> None:
         self.token = token or _read_env_token()
         if not self.token:
@@ -101,15 +121,26 @@ class DataifyClient:
             )
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
+        self.ai_web_base_url = _resolve_ai_web_base_url(ai_web_base_url)
+        self.ai_web = AIWebService(self)
 
     # ------------------------------------------------------------------
     # Low-level transport
     # ------------------------------------------------------------------
-    def _read_response_bytes(self, req: urllib.request.Request, url: str) -> bytes:
+    def _read_response_with_headers(
+        self, req: urllib.request.Request, url: str
+    ) -> tuple[bytes, dict[str, str]]:
+        """Open ``req`` and return the body plus lower-cased response headers."""
         display_url = _redact_url(url)
         try:
             with urllib.request.urlopen(req, timeout=self.timeout) as resp:
-                return resp.read()
+                raw_headers = getattr(resp, "headers", None)
+                headers = (
+                    {key.lower(): value for key, value in raw_headers.items()}
+                    if raw_headers is not None
+                    else {}
+                )
+                return resp.read(), headers
         except urllib.error.HTTPError as exc:  # upstream returned >= 400
             body = exc.read().decode("utf-8", errors="replace")
             raise DataifyAPIError(
@@ -123,6 +154,11 @@ class DataifyClient:
             raise DataifyConnectionError(
                 f"Could not connect to Dataify API at {display_url}: {exc.reason}"
             ) from exc
+
+    def _read_response_bytes(
+        self, req: urllib.request.Request, url: str
+    ) -> bytes:
+        return self._read_response_with_headers(req, url)[0]
 
     def _read_json_response(
         self, req: urllib.request.Request, url: str
@@ -146,6 +182,23 @@ class DataifyClient:
         req.add_header("Content-Type", "application/x-www-form-urlencoded")
         req.add_header("Authorization", f"Bearer {self.token}")
         return self._read_json_response(req, url)
+
+    def _post_json_with_headers(
+        self, base_url: str, path: str, payload: dict[str, Any]
+    ) -> tuple[Any, dict[str, str]]:
+        """POST JSON to an AI Web gateway and return body plus headers."""
+        url = base_url.rstrip("/") + path
+        data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        req = urllib.request.Request(url, data=data, method="POST")
+        req.add_header("Content-Type", "application/json")
+        req.add_header("Accept", "application/json")
+        req.add_header("Authorization", f"Bearer {self.token}")
+        raw, headers = self._read_response_with_headers(req, url)
+        text = raw.decode("utf-8", errors="replace")
+        try:
+            return json.loads(text), headers
+        except json.JSONDecodeError:
+            return {"raw": text}, headers
 
     def _get_json(self, path: str, query: dict[str, str]) -> Any:
         """GET a JSON endpoint with query parameters and return parsed JSON."""
